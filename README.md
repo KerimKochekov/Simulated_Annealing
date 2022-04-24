@@ -30,7 +30,7 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 7. Increment t;
 8. Repeat 2-8 until cooled down. The solution can be sampled before the system is cooled down, but we don't know whether this was the optimal solution.
 
-# Dataset
+# Data
 - https://github.com/hflabs/city
 
 ## Data preprocessing
