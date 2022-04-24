@@ -12,3 +12,9 @@ Simulated Annealing for TSP problem
 
 ## Fast cooling
 ![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/fast_cooling.png)
+
+
+
+## Better look for final answer
+- Used https://www.daftlogic.com/projects-google-maps-distance-calculator.htm
+![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/terminal.png)
