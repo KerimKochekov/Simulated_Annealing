@@ -7,7 +7,7 @@ Simulated Annealing (SA) for Travelling Salesman Problem (TSP) for 30 most popul
 ## TSP
 Given a list of cities and the distances between each pair of cities, what is
 the shortest possible route that visits each city once and returns to the origin
-city? In our case cities were 30 most populated Russian cities and distance were real geopgrahical [**Haversine distance**](https://en.wikipedia.org/wiki/Haversine_formula)
+city? In our case cities were the 30 most populated Russian cities and distance was real geographical [**Haversine distance**](https://en.wikipedia.org/wiki/Haversine_formula)
 
 ## Approach
 The energy distribution for this problem is easy to express in a format suitable for SA.
@@ -17,11 +17,12 @@ The energy distribution for this problem is easy to express in a format suitable
 where *path* is the ordered list of cities to visit, dist is the function that computes path distance. The main trick to solve traveling salesman with SA is to pick a proper proposal distribution. The common proposal policy for this problem is the following:
 1. Pick two cities in the path;
 2. Exchange their positions in the path;
-3. Return the new proposed path.
+3. Return to the new proposed path.
+- ``algorithm/SA_algorithm.py``: You can find my implemented SA algorithm for TSP here.
 
 # Algorithm
 1. Sample initial $x_0$, set time step t = 0;
-2. Set initial temperature T. To avoid problems with numerical overflow when calculating the exponent, set the temperature comparable with the initial value of the system’s energy;
+2. Set initial temperature T. To avoid problems with numerical overflow when calculating the exponent, set the temperature compared with the initial value of the system’s energy;
 3. Generate $x′$ from $g(x′|x_t)$. For continuous problems, the common solution is to use the normal distribution;
 4. Calculate acceptance ratio $α = \frac{p∗(x')}{p∗(x_t)}$;
 5. Generate $u ∼ U(0,1)$. If $u ≤ α$, accept the new state $x_{t+1} = x′$, otherwise propagate the old state. Pass x_{t+1} to the output of the sampler;
@@ -32,8 +33,8 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 # Dataset
 - https://github.com/hflabs/city
 
-## Data preporcessing
-- ``algorithm/processing.py``: Since provided dataset contains too many unneeded details in columns, we need apply some preprocessing (dropping some columns) and sorting (by population) to get this table. You can find table file here [top-30](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/algorithm/top-30_cities.csv).
+## Data preprocessing
+- ``algorithm/processing.py``: Since provided dataset contains too many unneeded details in columns, we need to apply some preprocessing (dropping some columns) and sorting (by population) to get this table. You can find the table file here [top-30](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/algorithm/top-30_cities.csv).
 
 | address         | geo_lat    | geo_lon     |
 |-----------------|------------|-------------|
@@ -69,7 +70,9 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 | Кемерово        | 55.3910651 | 86.0467781  |
 
 # Results
+We can consider an answer in the range of [17k, 20k] is sufficient. But I wanted to know the global minimum (best possible) for this specific problem (for given 30 cities). Due to that other than the SA algorithm, I implemented a heuristic solution that uses **Dynamic programming+Bitmask** with $O(2^n*n)$ execution time (~80 minutes of running for n = 30) and found the best possible answer (global minimum) as 17908. 
 
+Laterward ran the SA algorithm with slow cooling and fast cooling, luckily both approaches after some iterations (slow in 30-40 iterations and fast in 10-15 iterations) found 17908 as a minimum answer in less than one minute. As result, the SA algorithm can be poor for some combinatorial problems, but here for TSP, it worked perfectly in less time for different hyperparameters of temperature.
 [![Slow cooling](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/final.png)](https://youtu.be/3JeDslGMP-k)
 
 ## Cooling hyperparamteres
@@ -89,6 +92,6 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 - Temperature decay: 0.9
 ![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/fast_cooling.png)
 
-## Final answer on real Map
+## Final answer (~17.908km) on real Map
 - Used https://www.daftlogic.com/projects-google-maps-distance-calculator.htm
 ![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/terminal.png)
