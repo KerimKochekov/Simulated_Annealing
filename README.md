@@ -1,3 +1,11 @@
+# Statistical Techniques for Data Science Assignment #3
+Innopolis University, Spring 2022
+- Professor: Vladimir Ivanov
+- TA: Zamira Kholmatova
+- Student: Kerim Kochekov
+- Group: DS02 - B18
+- Github link: https://github.com/KerimKochekov/Simulated_Annealing 
+
 # Simulated Annealing
 
 Simulated Annealing (SA) for Travelling Salesman Problem (TSP) for 30 most populated Russian cities.
@@ -22,12 +30,12 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 
 # Algorithm
 1. Sample initial $x_0$, set time step t = 0;
-2. Set initial temperature T. To avoid problems with numerical overflow when calculating the exponent, set the temperature compared with the initial value of the system’s energy;
+2. Set initial temperature $T$. To avoid problems with numerical overflow when calculating the exponent, set the temperature compared with the initial value of the system’s energy;
 3. Generate $x′$ from $g(x′|x_t)$. For continuous problems, the common solution is to use the normal distribution;
 4. Calculate acceptance ratio $α = \frac{p∗(x')}{p∗(x_t)}$;
-5. Generate $u ∼ U(0,1)$. If $u ≤ α$, accept the new state $x_{t+1} = x′$, otherwise propagate the old state. Pass x_{t+1} to the output of the sampler;
-6. Reduce temperature T. Temperature annealing does not have to occur on every iteration. The temperature can be decreased every N iteration as well. There is no strict rule about this;
-7. Increment t;
+5. Generate $u ∼ U(0,1)$. If $u ≤ α$, accept the new state $x_{t+1} = x′$, otherwise propagate the old state. Pass $x_{t+1}$ to the output of the sampler;
+6. Reduce temperature $T$. Temperature annealing does not have to occur on every iteration. The temperature can be decreased every $N$ iteration as well. There is no strict rule about this;
+7. Increment $t$;
 8. Repeat 2-8 until cooled down. The solution can be sampled before the system is cooled down, but we don't know whether this was the optimal solution.
 
 # Data
