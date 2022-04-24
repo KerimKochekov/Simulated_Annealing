@@ -20,7 +20,7 @@ city? In our case cities were the 30 most populated Russian cities and distance 
 ## Approach
 The energy distribution for this problem is easy to express in a format suitable for SA.
 
-  $p^∗_sales(path) = e ^{− dist(path)/T}$
+  $p^∗_{sales}(path) = e ^{− dist(path)/T}$
   
 where *path* is the ordered list of cities to visit, dist is the function that computes path distance. The main trick to solve traveling salesman with SA is to pick a proper proposal distribution. The common proposal policy for this problem is the following:
 1. Pick two cities in the path;
@@ -81,7 +81,10 @@ where *path* is the ordered list of cities to visit, dist is the function that c
 We can consider an answer in the range of [17k, 20k] is sufficient. But I wanted to know the global minimum (best possible) for this specific problem (for given 30 cities). Due to that other than the SA algorithm, I implemented a heuristic solution that uses **Dynamic programming+Bitmask** with $O(2^n*n)$ execution time (~80 minutes of running for n = 30) and found the best possible answer (global minimum) as 17908. 
 
 Laterward ran the SA algorithm with slow cooling and fast cooling, luckily both approaches after some iterations (slow in 30-40 iterations and fast in 10-15 iterations) found 17908 as a minimum answer in less than one minute. As result, the SA algorithm can be poor for some combinatorial problems, but here for TSP, it worked perfectly in less time for different hyperparameters of temperature.
-[![Slow cooling](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/final.png)](https://youtu.be/3JeDslGMP-k)
+[Animation](https://youtu.be/3JeDslGMP-k)
+![Slow cooling](https://i.imgur.com/G2OTzHl.png)
+
+
 
 ## Cooling hyperparamteres
 - Initial temperature: 100
@@ -90,16 +93,21 @@ Laterward ran the SA algorithm with slow cooling and fast cooling, luckily both 
 
 ## Slow cooling
 - Temperature decay: 0.99
-![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/slow_cooling.png)
+![](https://i.imgur.com/2seiE6Y.png)
+
 
 ## Middle cooling
 - Temperature decay: 0.95
-![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/middle_cooling.png)
+![](https://i.imgur.com/wPNJbFX.png)
+
 
 ## Fast cooling
 - Temperature decay: 0.9
-![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/fast_cooling.png)
+![](https://i.imgur.com/iRfnIIW.png)
+
+We can see that slow cooling makes a really good job, but sadly it is slow. In contrast, fast cooling works fast, but it can sometimes miss the global minimum sometimes and stuck in the local minimum (luckily here it did not miss the global minimum and found the best possible answer). Finally, middle valued cooling did not do a good job by execution time or performance, so I prefer to use slow or fast cooling based on my need.
 
 ## Final answer (~17.908km) on real Map
 - Used https://www.daftlogic.com/projects-google-maps-distance-calculator.htm
-![](https://github.com/KerimKochekov/Simulated_Annealing/blob/main/bin/terminal.png)
+![](https://i.imgur.com/EwKPc3s.jpg)
+
