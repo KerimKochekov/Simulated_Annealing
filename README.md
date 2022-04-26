@@ -4,7 +4,7 @@ Innopolis University, Spring 2022
 - TA: Zamira Kholmatova
 - Student: Kerim Kochekov
 - Group: DS02 - B18
-- Github link: https://github.com/KerimKochekov/Simulated_Annealing 
+- HackMD link (for better Latex interpretation): https://hackmd.io/jEv0lr1yS_eTJDUuLj8TyA
 
 # Simulated Annealing
 
